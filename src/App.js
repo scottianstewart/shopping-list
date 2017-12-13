@@ -27,6 +27,7 @@ class App extends Component {
           id: item,
           title: items[item].title,
           user: items[item].user,
+          recurring: items[item].recurring,
         });
       }
       this.setState({
@@ -95,7 +96,6 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        {console.log(this.state)}
         <Nav logout={this.logout} login={this.login} user={this.state.user} />
         {this.state.user ? (
           <div>
@@ -134,7 +134,7 @@ class App extends Component {
                     {this.state.items.map(item => {
                       return (
                         <li key={item.id}>
-                          <h3>{item.title}</h3>
+                          <h3>{item.title}{item.recurring ? `Recurring` : null}</h3>
                           <p>
                             Added By: {item.user}
                             {item.user === this.state.user.displayName ||
