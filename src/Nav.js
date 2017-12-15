@@ -7,7 +7,11 @@ class Nav extends Component {
       <div className="nav">
         <h1>Shopping List</h1>
         {user ? (
-          <button onClick={logout}>Logout</button>
+          <div className="flex-row">
+            <span>{user.displayName}</span>
+            <div className="profile-image" style={{backgroundImage: `url('${user.photoURL}')`}} />
+            <button onClick={logout}>Logout</button>
+          </div>
         ) : (
           <button onClick={login}>Log In</button>
         )}

@@ -42,8 +42,8 @@ class App extends Component {
     });
   };
 
-  handleOptionChange = e => {
-    if (!this.state.isChecked) {
+  handleOptionChange = () => {
+    if (!this.state.recurringItem) {
       this.setState({
         recurringItem: true
       })
@@ -94,6 +94,8 @@ class App extends Component {
   };
 
   render() {
+    const { recurringItem } = this.state;
+
     return (
       <div className="app">
         <Nav logout={this.logout} login={this.login} user={this.state.user} />
@@ -121,7 +123,7 @@ class App extends Component {
                     type="checkbox"
                     name="recurring"
                     onChange={this.handleOptionChange}
-                    checked={this.state.recurringItem}
+                    checked={recurringItem}
                   />
                   <button>Add Item</button>
                 </form>
@@ -135,10 +137,10 @@ class App extends Component {
                       return (
                         <li key={item.id}>
                           <h3>{item.title}{item.recurring ? `Recurring` : null}</h3>
+                          {console.log(item.user)}
                           <p>
                             Added By: {item.user}
-                            {item.user === this.state.user.displayName ||
-                            item.user === this.state.user.email ? (
+                            {item.user === this.state.user.displayName ? (
                               <button onClick={() => this.removeItem(item.id)}>
                                 Remove Item
                               </button>
